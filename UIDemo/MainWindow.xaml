@@ -1,0 +1,108 @@
+﻿<Window x:Class="UiDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UiDemo"
+        mc:Ignorable="d"
+        Title="UIDemo" Height="Auto" Width="Auto"
+        SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
+
+
+
+
+    <Grid HorizontalAlignment="Left" Height="590" Margin="0,0,0,0" VerticalAlignment="Top" Width="610" Background="#eee">
+
+        <Grid.LayoutTransform>
+
+            <ScaleTransform 
+            CenterX="0" CenterY="0"
+            ScaleX="{Binding ElementName=uiScaleSlider,Path=Value}"
+
+            ScaleY="{Binding ElementName=uiScaleSlider,Path=Value}"
+
+        />
+
+        </Grid.LayoutTransform>
+
+
+
+        <Label  x:Name="DateLabel" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Arial"/>
+        <Label x:Name="TimeLabel" Content="Label" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="14" FontFamily="Arial" Margin="0,10,10,0"/>
+        <Label x:Name="MainTitle" Content="UiPath" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" FontFamily="Raleway Black" FontSize="30" Foreground="#FF2372B2"/>
+
+        <Border BorderBrush="#333" BorderThickness="0.5" Background="#bbb" HorizontalAlignment="Left" Height="540" Margin="0,50,0,0" VerticalAlignment="Top" Width="180">
+            <Grid>
+
+                <Label Content="Transaction" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" FontSize="13" FontFamily="Arial" Foreground="#FF2372B2"/>
+
+
+                <Slider 
+            x:Name="uiScaleSlider"
+            Value="1"
+            Minimum="0.8" Maximum="1.2" IsSnapToTickEnabled="True" Ticks="0.8,0.9,1,1.1,1.2" 
+            TickPlacement="BottomRight"
+            ValueChanged="Slider_ValueChanged"
+            HorizontalAlignment="Center" Margin="0,260,0,0" VerticalAlignment="Top" Width="129"/>
+                <RadioButton Content="Deposit" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top" Checked="Deposit_Checked" IsChecked="True"/>
+                <RadioButton x:Name="Withdrawalradiobutton" Content="Withdrawal" HorizontalAlignment="Left" Margin="25,45,0,0" VerticalAlignment="Top" Checked="Withdrawalradiobutton_Checked" />
+                <RadioButton Content="Split Deposit" HorizontalAlignment="Left" Margin="25,70,0,0" VerticalAlignment="Top" Checked="Splitradiobutton_Checked"/>
+                <Label Content="Configuration" HorizontalAlignment="Left" Margin="8,90,0,0" VerticalAlignment="Top" FontSize="13" FontFamily="Arial" Foreground="#FF2372B2"/>
+                <CheckBox x:Name="usecashcount" Content="Use Cash Count" HorizontalAlignment="Left" Margin="25,115,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked_1" Unchecked="CheckBox_UnChecked_1"/>
+                <Border  x:Name="CashCountBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="25,130,0,0" VerticalAlignment="Top" Width="145" IsEnabled="False">
+                    <Grid>
+
+                        <RadioButton Content="Use Piece Count" Margin="5,5,0,0" IsChecked="True"/>
+                        <RadioButton Content="Use Amount" Margin="5,22,0,0"/>
+                        <RadioButton Content="Use Both" Margin="5,39,0,40"/>
+                        <CheckBox Content="Reverse Denomination" HorizontalAlignment="Left" Margin="1,58,0,0" VerticalAlignment="Top"/>
+                        <CheckBox Content="Eliminate $2" HorizontalAlignment="Left" Margin="1,75,0,0" VerticalAlignment="Top" IsChecked="True"/>
+
+                    </Grid>
+                </Border>
+                <Label Content="Scale" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" FontSize="13" FontFamily="Arial" Foreground="#FF2372B2"/>
+                <CheckBox Name="GraphLabel" Content="Graphical label" HorizontalAlignment="Left" Margin="26,300,0,0" VerticalAlignment="Top" Checked="graphLabel_Checked" Unchecked="graphLabel_Unchecked" />
+                <CheckBox Name="EnableAdditional" Content="Enable additional icon" HorizontalAlignment="Left" Margin="26,327,0,0" VerticalAlignment="Top" Checked="additionalitem_Checked" Unchecked="additionalitem_UnChecked"/>
+                <CheckBox Name="ChangeTItle" Content="Change window title" HorizontalAlignment="Left" Margin="26,354,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_UnChecked"/>
+                <CheckBox Name="EnableCrashSimulation"  AutomationProperties.Name="EnableCrashSimulation" Content="Enable crash simulation" HorizontalAlignment="Left" Margin="26, 381, 0, 0" VerticalAlignment="Top" Checked="EnableCrashSimulation_Checked" Unchecked="EnableCrashSimulation_UnChecked"/>
+                <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="60" Margin="25,400,0,0" VerticalAlignment="Top" Width="145">
+                <Grid>
+                    <Label Content="Method" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 4, 0, 0"/>
+                    <ComboBox Name="CrashMethod" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 4, 0, 0" Width="92" SelectionChanged="CrashMethod_SelectionChanged" IsEnabled="False">
+                            <ComboBoxItem Content="Operation count"/>
+                            <ComboBoxItem Content="Random"/>
+                        </ComboBox>
+                    <Label Content="Rate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 27, 0, 0"/>
+                    <TextBox Name="CrashRateTextBox" IsEnabled="False" Text="5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 31, 0, 0" Width="92" MaxLines="1" PreviewTextInput="CrashRateTextBox_PreviewTextInput" TextChanged="CrashRateTextBox_TextChanged"/>
+                </Grid>
+                </Border>
+                
+                <Button Content="Exit" HorizontalAlignment="Left" Margin="26,490,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click" Height="34" FontSize="16"/>
+
+
+
+
+
+
+
+
+
+
+
+            </Grid>
+        </Border>
+
+        <ContentControl HorizontalAlignment="Left" Margin="180,50,0,30" VerticalAlignment="Top">
+            <ContentControl x:Name="ContentControl1" Content="DepositControl" Background="White" RenderTransformOrigin="1.129,0.667"/>
+        </ContentControl>
+
+
+        <Image x:Name="additionallogo" HorizontalAlignment="Left" Height="30" Margin="444,0,0,0" VerticalAlignment="Top" Width="30" Source="Bitmap1.bmp" Visibility="Hidden"/>
+
+    </Grid>
+
+
+
+
+
+</Window>
