@@ -1,63 +1,46 @@
 ﻿using System;
 using System.Windows;
 
-public enum CrashSimulatorType
-{
-    Random,
-    OperationCount
-}
-
 public class CrashSimulator
 {
-    private readonly bool _isEnabled;
-    private readonly CrashSimulatorType _type;
-
-    /// <summary>
-    /// for Random type, it represent the change of crashing, between 0 and 100, 
-    /// for OperationCount, it represent the number of operation after which it crashed.
-    /// </summary>
     private int _threshold;
+    
+    private Random _randomizer = new Random();
 
-    private int _operationCounter;
-
-    private Random _random;
-
-    public CrashSimulator(bool isEnabled, CrashSimulatorType type, int threshold)
+    public CrashSimulator(int threshold)
 	{
-        _isEnabled = isEnabled;
-        _type = type;
-        _threshold = threshold;
-
-        if (CrashSimulatorType.Random == _type)
-            _random = new Random();
+        _threshold = ConvertThresholdToPercentage(threshold);
 	}
 
     public void CrashIfItsTheTime()
     {
-        if (!_isEnabled)
-            return;
-
-        if (CrashSimulatorType.Random == _type)
-        {
-            if (_random.Next(0, 100) >= _threshold)
-                GenerateCrash();
-        }
-        else
-        {
-            // Operation count based crash
-            _operationCounter++;
-
-            if (_operationCounter >= _threshold)
-                GenerateCrash();
-        }
+        if (_randomizer.Next(100) < _threshold)
+            GenerateCrash();
     }
 
     private void GenerateCrash()
     {
-        // Show a modal window to inform the user that the application crashed.
-        MessageBox.Show("Now is the time to crash.", "Simulated Crash", MessageBoxButton.OK, MessageBoxImage.Error);
-
         // Crash the application.
         throw new Exception("Simulated Crash!!!");
+    }
+
+    /// <summary>
+    /// Map the Crash Slider values to percentage for crash probability.
+    /// </summary>
+    /// <param name="threshold">Slider position</param>
+    /// <returns>Probability or crash</returns>
+    private int ConvertThresholdToPercentage(int threshold)
+    {
+        switch(threshold)
+        {
+            case 1:
+                return 1;
+            case 2:
+                return 4;
+            case 3:
+                return 16;
+            default:
+                throw new ArgumentOutOfRangeException("Threshold value is not mapped to percentage value.");
+        }
     }
 }

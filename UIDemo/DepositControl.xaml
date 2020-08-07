@@ -20,9 +20,9 @@
         <Label  Content="On Us Check" HorizontalAlignment="Left" Margin="36,124,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Arial"/>
 
         <Label  Content="Not On Us Check" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Arial"/>
-        <TextBox x:Name="cashintb" HorizontalAlignment="Left" Height="23" Margin="145,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Right" LostFocus="Textfield_Focus_Changed" MaxLength="8" PreviewTextInput="NumberValidationTextBox"/>
-        <TextBox x:Name="onustb" HorizontalAlignment="Left" Height="23" Margin="145,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Right" LostFocus="Textfield_Focus_Changed" MaxLength="8" PreviewTextInput="NumberValidationTextBox"/>
-        <TextBox x:Name="notonustb" HorizontalAlignment="Left" Height="23" Margin="145,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Right" LostFocus="Textfield_Focus_Changed" MaxLength="8" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="cashintb" HorizontalAlignment="Left" Height="23" Margin="145,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Right" LostFocus="Textfield_Focus_Changed" MaxLength="8" PreviewTextInput="NumberValidationTextBox" TextChanged="TextField_TextChanged"/>
+        <TextBox x:Name="onustb" HorizontalAlignment="Left" Height="23" Margin="145,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Right" LostFocus="Textfield_Focus_Changed" MaxLength="8" PreviewTextInput="NumberValidationTextBox" TextChanged="TextField_TextChanged"/>
+        <TextBox x:Name="notonustb" HorizontalAlignment="Left" Height="23" Margin="145,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Right" LostFocus="Textfield_Focus_Changed" MaxLength="8" PreviewTextInput="NumberValidationTextBox" TextChanged="TextField_TextChanged"/>
         <Button x:Name="CashC" Content="Cash Count" HorizontalAlignment="Left" Margin="296,88,0,0" VerticalAlignment="Top" Width="80" Height="23" IsEnabled="False" Click ="Cash_Click"/>
         <Label  Content="Total deposit" HorizontalAlignment="Left" Margin="32,262,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Arial"/>
         <Label x:Name="TotalLB"  Content="$0.00" HorizontalAlignment="Left" Margin="220,262,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Arial"/>

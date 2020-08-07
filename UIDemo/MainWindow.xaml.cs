@@ -203,6 +203,7 @@ namespace UiDemo
             Application.Current.Shutdown();
         }
 
+
         #region Load / Save values from App Configuration
 
         private void UpdateAppConfiguration()
@@ -210,8 +211,7 @@ namespace UiDemo
             Dictionary<string, string> keyValuePairs = new Dictionary<string, string>
             {
                 {"EnableCrashSimulation", EnableCrashSimulation.IsChecked.Value.ToString()},
-                {"CrashMethod", CrashMethod.Text },
-                {"CrashRate", CrashRateTextBox.Text }
+                {"CrashSliderValue", CrashSlider.Value.ToString()},
             };
 
             try
@@ -244,12 +244,10 @@ namespace UiDemo
         private void LoadDefaultValues()
         {
             bool enableCrashSimulation = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableCrashSimulation"]);
-            string crashType = ConfigurationManager.AppSettings["CrashMethod"];
-            string crashRate = ConfigurationManager.AppSettings["CrashRate"];
+            double crashSliderValue = Convert.ToDouble(ConfigurationManager.AppSettings["CrashSliderValue"]);
 
             EnableCrashSimulation.IsChecked = enableCrashSimulation;           
-            CrashMethod.SelectedValue = crashType;
-            CrashRateTextBox.Text = crashRate;
+            CrashSlider.Value = crashSliderValue;
         }
 
         #endregion
@@ -257,35 +255,16 @@ namespace UiDemo
 
         #region Crash Simulator implementation
 
-        private void EnableCrashSimulation_Checked(object sender, RoutedEventArgs e)
+        private void EnableCrashSimulation_Changed(object sender, RoutedEventArgs e)
         {
             if (this.IsInitialized)
                 UpdateCrashSimulator();
         }
 
-        private void EnableCrashSimulation_UnChecked(object sender, RoutedEventArgs e)
+        private void CrashSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (this.IsInitialized)
                 UpdateCrashSimulator();
-        }
-
-        private void CrashMethod_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (this.IsInitialized)
-                UpdateCrashSimulator();
-        }
-
-        private void CrashRateTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (this.IsInitialized)
-                UpdateCrashSimulator();
-        }
-
-        // Allow only digits to be entered into the CrashRateTextBox
-        private static readonly Regex _regex = new Regex("[0-9]+");
-        private void CrashRateTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !_regex.IsMatch(e.Text);
         }
 
         private void UpdateCrashSimulator()
@@ -293,25 +272,11 @@ namespace UiDemo
             // Get if crash simulator is enabled or not
             bool crashEnabled = EnableCrashSimulation.IsChecked.Value;
 
-            // Get the selected Crash Type
-            CrashSimulatorType cType;
-            switch (CrashMethod.Text)
-            {
-                case "Random":
-                    cType = CrashSimulatorType.Random;
-                    break;
-                default:
-                    cType = CrashSimulatorType.OperationCount;
-                    break;
-            }
-
-            // Get the crash rate
-            int crashRate = 5;
-            if (null != CrashRateTextBox && !String.IsNullOrWhiteSpace(CrashRateTextBox.Text))
-                crashRate = Convert.ToInt32(CrashRateTextBox.Text);
-
             if (crashEnabled)
-                depositc.EnabledCrashSimulator(cType, crashRate);
+            {
+                int crashRate = Convert.ToInt32(CrashSlider.Value);
+                depositc.EnabledCrashSimulator(crashRate);
+            }
             else
                 depositc.DisableCrashSimulator();
 
@@ -322,11 +287,11 @@ namespace UiDemo
 
         private void EnableCrashControls(bool enable)
         {
-            CrashMethod.IsEnabled = enable;
-
-            CrashRateTextBox.IsEnabled = enable;
+            CrashSlider.IsEnabled = enable;
         }
 
         #endregion
+
+        
     }
 }

@@ -64,19 +64,11 @@
                 <CheckBox Name="GraphLabel" Content="Graphical label" HorizontalAlignment="Left" Margin="26,300,0,0" VerticalAlignment="Top" Checked="graphLabel_Checked" Unchecked="graphLabel_Unchecked" />
                 <CheckBox Name="EnableAdditional" Content="Enable additional icon" HorizontalAlignment="Left" Margin="26,327,0,0" VerticalAlignment="Top" Checked="additionalitem_Checked" Unchecked="additionalitem_UnChecked"/>
                 <CheckBox Name="ChangeTItle" Content="Change window title" HorizontalAlignment="Left" Margin="26,354,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_UnChecked"/>
-                <CheckBox Name="EnableCrashSimulation"  AutomationProperties.Name="EnableCrashSimulation" Content="Enable crash simulation" HorizontalAlignment="Left" Margin="26, 381, 0, 0" VerticalAlignment="Top" Checked="EnableCrashSimulation_Checked" Unchecked="EnableCrashSimulation_UnChecked"/>
-                <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="60" Margin="25,400,0,0" VerticalAlignment="Top" Width="145">
-                <Grid>
-                    <Label Content="Method" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 4, 0, 0"/>
-                    <ComboBox Name="CrashMethod" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 4, 0, 0" Width="92" SelectionChanged="CrashMethod_SelectionChanged" IsEnabled="False">
-                            <ComboBoxItem Content="Operation count"/>
-                            <ComboBoxItem Content="Random"/>
-                        </ComboBox>
-                    <Label Content="Rate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 27, 0, 0"/>
-                    <TextBox Name="CrashRateTextBox" IsEnabled="False" Text="5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 31, 0, 0" Width="92" MaxLines="1" PreviewTextInput="CrashRateTextBox_PreviewTextInput" TextChanged="CrashRateTextBox_TextChanged"/>
-                </Grid>
-                </Border>
-                
+                <CheckBox Name="EnableCrashSimulation"  AutomationProperties.Name="EnableCrashSimulation" Content="Enable crash simulation" HorizontalAlignment="Left" Margin="26, 381, 0, 0" VerticalAlignment="Top" Checked="EnableCrashSimulation_Changed" Unchecked="EnableCrashSimulation_Changed"/>
+                <Label Content="Rarely" HorizontalAlignment="Left" Margin="25, 395, 0, 0" VerticalAlignment="Top" />
+                <Label Content="Often" HorizontalAlignment="Left" Margin="130, 395, 0, 0" VerticalAlignment="Top" />
+                <Slider Name="CrashSlider" Minimum="1" Maximum="3" IsSnapToTickEnabled="True" Ticks="1,2,3" TickPlacement="BottomRight"
+                    ValueChanged="CrashSlider_ValueChanged" HorizontalAlignment="Center" Margin="25,420,0,0" VerticalAlignment="Top" Width="130" />
                 <Button Content="Exit" HorizontalAlignment="Left" Margin="26,490,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click" Height="34" FontSize="16"/>
 
 

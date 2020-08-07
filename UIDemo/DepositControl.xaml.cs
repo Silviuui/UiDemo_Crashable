@@ -160,10 +160,6 @@ namespace UiDemo
             onustb.Text = "";
             notonustb.Text = "";
             TotalLB.Content = "$0.00";
-
-            if (null != crashSimulator)
-                crashSimulator.CrashIfItsTheTime();
-
         }
 
 
@@ -181,14 +177,32 @@ namespace UiDemo
             }
         }
 
-        public void EnabledCrashSimulator(CrashSimulatorType type, int threshold)
+        #region Crash simulator 
+
+        /// <summary>
+        /// Prevent calling the crash simulator check if the updated control is the same, i.e. typing multiple keys in the same text box.
+        /// </summary>
+        private object _lastChangedControl = null;
+
+        private void TextField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            crashSimulator = new CrashSimulator(true, type, threshold);
+            if (null != crashSimulator && sender != _lastChangedControl)
+            {
+                _lastChangedControl = sender;
+                crashSimulator.CrashIfItsTheTime();
+            }
+        }
+
+        public void EnabledCrashSimulator(int threshold)
+        {
+            crashSimulator = new CrashSimulator(threshold);
         }
 
         public void DisableCrashSimulator()
         {
             crashSimulator = null;
         }
+
+        #endregion
     }
 }
